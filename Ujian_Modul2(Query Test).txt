@@ -1,0 +1,26 @@
+-- QUERY TEST
+-- 1. 
+SELECT * FROM city
+WHERE CountryCode = 'IDN'
+ORDER BY Population DESC
+LIMIT 10;
+
+-- 2. 
+SELECT id, Name AS Nama_Kota, District, Population FROM city
+ORDER BY Population DESC
+LIMIT 10; 
+
+-- 3.
+SELECT c.code, c.name, cl.Language, isOfficial, cl.Percentage FROM country c
+JOIN countrylanguage cl ON cl.CountryCode = c.code
+WHERE Language = 'English' AND isOfficial = 'T'
+ORDER BY Percentage DESC
+LIMIT 10;
+
+-- 4
+SELECT name, Continent, LifeExpectancy, GNP FROM country
+WHERE Continent = 'Asia' AND LifeExpectancy > (
+	SELECT AVG(LifeExpectancy) FROM country WHERE Continent = 'Europe'
+    )
+ORDER BY LifeExpectancy DESC
+LIMIT 10;
